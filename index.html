@@ -4,6 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>100 Video Fakta Hewan</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="theme-color" content="#1f7a4d">
 <style>
 :root{--bg:#f3f1ec;--card:#fff;--ink:#1c2b24;--mut:#62706a;--line:#d9d6cc;--acc:#1f7a4d;--accink:#fff;--part:#f2b84b}
 @media (prefers-color-scheme:dark){:root{--bg:#121a16;--card:#1b2620;--ink:#e8f0ea;--mut:#9fb0a6;--line:#2c3a32;--acc:#4cc790;--accink:#0b1a12;--part:#c9962f}}
@@ -31,16 +35,32 @@ button{font:inherit;cursor:pointer}
 .nav{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
 .nav .main{background:var(--acc);color:var(--accink);border-color:var(--acc);font-weight:700}
 button:focus-visible,input:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.g{min-height:44px}
+button.cp,.nav button{min-height:40px}
+@media (min-width:900px) and (orientation:landscape){
+ .w{max-width:1280px;display:grid;grid-template-columns:340px 1fr;gap:24px;align-items:start;padding:20px 24px 40px}
+ #side{position:sticky;top:12px;max-height:calc(100vh - 24px);overflow:auto;padding-right:6px}
+ #grid{grid-template-columns:repeat(6,1fr)}
+ h1{font-size:1.4rem}
+ .cl{grid-template-columns:repeat(4,1fr)}
+ #v h2:first-child{margin-top:0}
+}
+@media (max-width:899px),(orientation:portrait){
+ .w{max-width:640px}
+ #grid{grid-template-columns:repeat(auto-fill,minmax(44px,1fr))}
+}
 .tiny{color:var(--mut);font-size:.85rem}
 </style>
 </head>
 <body>
 <div class="w">
+<aside id="side">
 <h1>100 Video Fakta Hewan</h1>
 <p class="sub">Prompt gambar, naskah voice over, teks layar, judul, deskripsi, dan thumbnail untuk setiap video. Centang langkah yang sudah selesai.</p>
 <div class="bar"><i id="fill"></i></div>
 <p class="tiny" id="prog"></p>
 <div id="grid"></div>
+</aside>
 <main id="v"></main>
 </div>
 <script>
@@ -213,6 +233,7 @@ function show(){
  m.appendChild(nv);
 }
 show();
+if("serviceWorker" in navigator){window.addEventListener("load",()=>{navigator.serviceWorker.register("sw.js").catch(()=>{})})}
 </script>
 </body>
 </html>
