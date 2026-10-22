@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>100 Video Fakta Hewan</title>
+<style>
+:root{--bg:#f3f1ec;--card:#fff;--ink:#1c2b24;--mut:#62706a;--line:#d9d6cc;--acc:#1f7a4d;--accink:#fff;--part:#f2b84b}
+@media (prefers-color-scheme:dark){:root{--bg:#121a16;--card:#1b2620;--ink:#e8f0ea;--mut:#9fb0a6;--line:#2c3a32;--acc:#4cc790;--accink:#0b1a12;--part:#c9962f}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif}
+.w{max-width:860px;margin:0 auto;padding:20px 14px 60px}
+h1{margin:0 0 4px;font-size:1.7rem}
+h2{margin:18px 0 10px;font-size:1.3rem}
+.sub{color:var(--mut);margin:0 0 14px}
+.bar{height:10px;background:var(--line);border-radius:10px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--acc);transition:width .2s}
+#grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(40px,1fr));gap:6px;margin:14px 0}
+.g{padding:8px 0;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;cursor:pointer;font:inherit;font-size:.85rem}
+.g.part{background:var(--part);color:#1a1200}
+.g.ok{background:var(--acc);color:var(--accink);border-color:var(--acc)}
+.g.cur{outline:3px solid var(--ink);outline-offset:1px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;margin:12px 0}
+.ph{display:flex;justify-content:space-between;align-items:center;gap:8px;font-weight:700;margin-bottom:6px}
+pre{white-space:pre-wrap;word-break:break-word;margin:0;font:.9rem/1.5 ui-monospace,Menlo,Consolas,monospace;background:var(--bg);padding:10px;border-radius:8px}
+button{font:inherit;cursor:pointer}
+.cp,.nav button{border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:8px;padding:6px 12px}
+.cl{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:8px}
+.cl label{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px;display:flex;gap:8px;align-items:center;cursor:pointer}
+.cl input{width:20px;height:20px;accent-color:var(--acc)}
+.nav{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.nav .main{background:var(--acc);color:var(--accink);border-color:var(--acc);font-weight:700}
+button:focus-visible,input:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.tiny{color:var(--mut);font-size:.85rem}
+</style>
+</head>
+<body>
+<div class="w">
+<h1>100 Video Fakta Hewan</h1>
+<p class="sub">Prompt gambar, naskah voice over, teks layar, judul, deskripsi, dan thumbnail untuk setiap video. Centang langkah yang sudah selesai.</p>
+<div class="bar"><i id="fill"></i></div>
+<p class="tiny" id="prog"></p>
+<div id="grid"></div>
+<main id="v"></main>
+</div>
+<script>
+const RAW=`octopus|has three hearts and blue blood|can squeeze through any gap bigger than its beak
+wombat|produces cube-shaped droppings|can run up to about 40 kilometers per hour
+sea otter|holds hands with other otters while sleeping|keeps a favorite rock in a skin pouch to crack open shellfish
+owl|can turn its head up to 270 degrees|flies almost silently thanks to soft feather edges
+immortal jellyfish|can revert to a younger stage when stressed|is only about four millimeters wide
+pistol shrimp|snaps its claw so fast it stuns prey with sound|makes one of the loudest sounds in the ocean
+shark|is older than trees|has a skeleton made of cartilage, not bone
+cheetah|goes from zero to 100 kilometers per hour in about three seconds|cannot roar, but it can purr and chirp
+peregrine falcon|dives at over 300 kilometers per hour|is the fastest animal on Earth
+sailfish|is one of the fastest fish in the ocean|raises a huge sail-like fin when hunting
+bat|is the only mammal capable of true flight|uses echolocation to find insects in the dark
+cat|has a third eyelid|can rotate its ears 180 degrees
+giraffe|has only seven neck bones, just like a human|has a tongue about 45 centimeters long
+elephant|is the largest land animal|can recognize itself in a mirror
+dolphin|sleeps with half its brain at a time|calls its friends with signature whistles
+emperor penguin|can dive deeper than 500 meters|keeps its egg warm on its feet through the freezing winter
+koala|has fingerprints almost identical to a human's|sleeps up to 20 hours a day
+sloth|moves so slowly that algae grows on its fur|climbs down from its tree only about once a week to go to the toilet
+platypus|is a mammal that lays eggs|has a bill that senses electric signals
+axolotl|can regrow lost limbs|keeps its juvenile features into adulthood
+mantis shrimp|has one of the fastest punches in the animal kingdom|sees color using many more receptor types than humans
+crow|can recognize human faces|can use tools to get food
+hummingbird|is one of the few birds that can fly backward|beats its wings dozens of times every second
+kangaroo|cannot walk backward|carries its baby, called a joey, in a pouch
+polar bear|has black skin under its fur|has transparent hollow hairs that look white
+chameleon|can move each eye independently|has a tongue that can be as long as its body
+tardigrade|can survive in outer space|can endure extreme heat, cold, and radiation
+flamingo|gets its pink color from the food it eats|can rest standing on one leg
+gorilla|has a nose print as unique as a fingerprint|eats mostly plants and is usually gentle
+hippo|secretes a reddish fluid that protects its skin|cannot swim and walks along riverbeds instead
+camel|stores fat, not water, in its hump|can close its nostrils to keep out sand
+lion|sleeps up to 20 hours a day|has a roar that can be heard from about 8 kilometers away
+tiger|has stripes on its skin, not just its fur|is the largest wild cat in the world
+zebra|has stripes as unique as fingerprints|can stand and walk within minutes of being born
+rhino|has a horn made of keratin, like your fingernails|has poor eyesight but a great sense of smell
+crocodile|has one of the strongest bites of any animal|cannot stick out its tongue
+komodo dragon|is the largest living lizard|has a venomous bite
+king cobra|is the longest venomous snake in the world|eats other snakes
+poison dart frog|gets its toxins from the insects it eats|uses bright colors to warn predators
+seahorse|is a fish where the male carries the babies|has no stomach
+clownfish|lives safely inside sea anemones|can change from male to female
+pufferfish|inflates its body by swallowing water|carries a toxin that can be deadly
+anglerfish|uses a glowing lure to attract prey|lives in the deep, dark ocean
+blue whale|is the largest animal ever known to exist|can eat up to four tons of krill in a day
+orca|is actually a dolphin|hunts in family groups called pods
+narwhal|has a tusk that is really a tooth|is nicknamed the unicorn of the sea
+manta ray|has one of the largest brains of any fish|can leap out of the water
+sea turtle|returns to the beach where it was born to lay eggs|has been around since the age of the dinosaurs
+jellyfish|has no brain, heart, or bones|is more than 95 percent water
+starfish|can regrow lost arms|has no brain and no blood
+eagle|has eyesight several times sharper than a human|builds some of the largest nests of any bird
+parrot|can mimic human speech|can live for decades
+peacock|has a tail fan of about 200 feathers|uses it to impress a mate
+ostrich|is the largest bird in the world|has eyes bigger than its brain
+woodpecker|can peck up to about 20 times per second|has a tongue that wraps around its skull
+albatross|can have a wingspan of more than three meters|can glide for hours without flapping
+kiwi|is a flightless bird from New Zealand|lays an egg that is huge compared to its body
+pelican|has a throat pouch that can hold more than its stomach|scoops up fish and drains the water out
+toucan|has a huge colorful bill|uses its bill to reach fruit on thin branches
+honey bee|can recognize human faces|tells others where flowers are with a waggle dance
+ant|can carry many times its own body weight|breathes through tiny holes in its body
+butterfly|tastes with its feet|starts life as a caterpillar
+firefly|makes light with almost no heat|uses flashes to find a mate
+dragonfly|has nearly 360-degree vision|has been around since before the dinosaurs
+praying mantis|can turn its head almost 180 degrees|catches prey with lightning-fast front legs
+jumping spider|can see in color|can jump many times its own body length
+scorpion|glows under ultraviolet light|can survive for months without food
+dung beetle|navigates using the Milky Way|can roll a ball many times its own weight
+wolf|howls to communicate over long distances|lives and hunts in family packs
+arctic fox|changes its fur color with the seasons|survives temperatures far below freezing
+red panda|is not closely related to the giant panda|uses its bushy tail like a blanket
+giant panda|spends up to 14 hours a day eating bamboo|is born tiny, about the size of a stick of butter
+beaver|has orange teeth because of iron|builds dams that reshape whole landscapes
+squirrel|forgets some of the nuts it buries, which can grow into trees|has front teeth that never stop growing
+hedgehog|has around 5,000 spines|rolls into a ball for protection
+armadillo|is covered in bony armor|can hold its breath for several minutes
+meerkat|takes turns standing guard as a lookout|lives in groups called mobs
+capybara|is the largest rodent in the world|gets along with many other animals
+moose|is the largest member of the deer family|can swim and dive to eat water plants
+reindeer|has eyes that change color with the seasons|grows antlers, even the females
+horse|can sleep standing up|has the largest eyes of any land mammal
+dog|has a sense of smell far stronger than ours|can learn hundreds of words
+pig|is one of the smartest farm animals|rolls in mud to cool down because it cannot sweat well
+cow|has panoramic vision|forms close friendships with other cows
+goat|has rectangular pupils|can climb steep cliffs with ease
+sheep|can remember and recognize faces|has a field of view of about 300 degrees
+naked mole-rat|barely feels certain kinds of pain|lives far longer than other rodents its size
+gecko|sticks to walls without any glue|can drop its tail to escape predators
+chimpanzee|uses sticks as tools to fish for termites|shares about 98 percent of its DNA with humans
+orangutan|builds a new nest to sleep in each night|is the largest tree-living animal
+lemur|lives only on the island of Madagascar|uses scent to mark its territory
+fennec fox|has huge ears that release body heat|lives in the Sahara Desert
+okapi|looks like a zebra but is related to giraffes|has a tongue long enough to clean its own ears
+tarsier|has eyes that are each about as big as its brain|can turn its head almost 180 degrees
+aye-aye|taps on trees to find insects inside|has a very long, thin middle finger
+pangolin|is the only mammal covered in scales|rolls into a ball when threatened
+manatee|is related to elephants|is nicknamed the sea cow
+walrus|uses its tusks to pull itself onto ice|can sleep floating in the water
+humpback whale|sings long songs that travel through the ocean|blows bubble nets to trap fish
+snow leopard|has a long tail it wraps around itself like a scarf|can leap up to about 15 meters`;
+const V=RAW.trim().split("\n").map((l,i)=>{const p=l.split("|");return{i:i+1,n:p[0],a:p[1],b:p[2]}});
+const T=s=>s.replace(/\b\w/g,c=>c.toUpperCase());
+const HOOK=[n=>`Meet the ${n}, an animal full of surprises.`,n=>`Did you know the ${n} can do this?`,n=>`You will not believe these facts about the ${n}.`,n=>`The ${n} is stranger than you think.`];
+const CTA=["Which fact surprised you most? Subscribe for more animal facts!","Follow for a new animal fact every day!","Comment your favorite animal, and I will cover it next!"];
+const TTL=[n=>`${T(n)} Facts You Never Knew 🤯`,n=>`Amazing ${T(n)} Facts #shorts`,n=>`The Truth About the ${T(n)} 😲`];
+const STEP=["Gambar dibuat","Voice over dibuat","Diedit di CapCut","Diupload"];
+const KEY="animal100_v1";
+let st={};try{st=JSON.parse(localStorage.getItem(KEY)||"{}")}catch(e){st={}}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}};
+const done=i=>(st[i]||[]).filter(Boolean).length;
+const $=s=>document.querySelector(s);
+const first=()=>{for(const v of V)if(done(v.i)<4)return v.i;return 1};
+let cur=first();
+function gen(v){
+ const n=v.n,N=T(n),k=v.i;
+ const vo=`${HOOK[k%4](n)} First, the ${n} ${v.a}. Now here is the part that surprises most people. The ${n} also ${v.b.replace(/^(\w+)/,"$1")}. ${CTA[k%3]}`.replace("also is","is also").replace("also has","also has");
+ const tag=n.replace(/[^a-z]/g,"");
+ return[
+ ["Prompt gambar 1 (close-up)",`Ultra-realistic wildlife photo, close-up portrait of a ${n} looking at the camera, natural habitat, soft golden light, sharp eyes, shallow depth of field, vertical 9:16, 4K`],
+ ["Prompt gambar 2 (fakta 1)",`Ultra-realistic wildlife photo of a ${n} showing that it ${v.a}, dynamic motion, cinematic lighting, vertical 9:16, 4K`],
+ ["Prompt gambar 3 (fakta 2)",`Ultra-realistic wildlife photo of a ${n} showing that it ${v.b}, cinematic lighting, vertical 9:16, 4K`],
+ ["Prompt gambar 4 (habitat)",`Ultra-realistic wide shot of a ${n} in its natural environment, dramatic landscape, golden hour, vertical 9:16, 4K`],
+ ["Naskah voice over",vo],
+ ["Teks layar (caption)",`${N.toUpperCase()} FACTS 🤯\nFACT 1: It ${v.a}\nFACT 2: It ${v.b}\nFOLLOW FOR MORE 🐾`],
+ ["Judul",TTL[k%3](n)],
+ ["Deskripsi dan hashtag",`Amazing facts about the ${n}! The ${n} ${v.a}. Subscribe for more animal facts.\n\n#animalfacts #${tag} #wildlife #funfacts #shorts`],
+ ["Thumbnail (teks + prompt)",`Teks: ${N.toUpperCase()}\nSub teks: WILD FACTS\nPrompt: Close-up of a ${n} with an expressive face, bold high-contrast colors, blurred background, empty space for large text, vertical 9:16`]
+ ];
+}
+function copy(t,b){
+ const ok=()=>{const o=b.textContent;b.textContent="Tersalin";setTimeout(()=>b.textContent=o,1100)};
+ const fb=()=>{const a=document.createElement("textarea");a.value=t;document.body.appendChild(a);a.select();try{document.execCommand("copy");ok()}catch(e){}a.remove()};
+ try{navigator.clipboard.writeText(t).then(ok,fb)}catch(e){fb()}
+}
+function drawGrid(){
+ const g=$("#grid");g.innerHTML="";
+ V.forEach(v=>{const b=document.createElement("button");const d=done(v.i);
+  b.className="g"+(d==4?" ok":d>0?" part":"")+(v.i==cur?" cur":"");
+  b.textContent=v.i;b.title=T(v.n);b.onclick=()=>{cur=v.i;show();scrollTo(0,0)};g.appendChild(b)});
+ const t=V.filter(v=>done(v.i)==4).length;
+ $("#prog").textContent=t+" dari 100 video selesai";$("#fill").style.width=t+"%";
+}
+function show(){
+ drawGrid();
+ const v=V[cur-1],m=$("#v");m.innerHTML="";
+ const h=document.createElement("h2");h.textContent="Video "+v.i+": "+T(v.n);m.appendChild(h);
+ const cl=document.createElement("div");cl.className="cl";
+ STEP.forEach((s,k)=>{const l=document.createElement("label"),i=document.createElement("input");
+  i.type="checkbox";i.checked=!!(st[v.i]||[])[k];
+  i.onchange=()=>{st[v.i]=st[v.i]||[false,false,false,false];st[v.i][k]=i.checked;save();show()};
+  l.appendChild(i);l.appendChild(document.createTextNode(s));cl.appendChild(l)});
+ m.appendChild(cl);
+ gen(v).forEach(c=>{
+  const d=document.createElement("div");d.className="card";
+  const ph=document.createElement("div");ph.className="ph";
+  const sp=document.createElement("span");sp.textContent=c[0];
+  const b=document.createElement("button");b.className="cp";b.textContent="Salin";b.onclick=()=>copy(c[1],b);
+  ph.appendChild(sp);ph.appendChild(b);d.appendChild(ph);
+  const p=document.createElement("pre");p.textContent=c[1];d.appendChild(p);m.appendChild(d)});
+ const nv=document.createElement("div");nv.className="nav";
+ const mk=(t,f,c)=>{const b=document.createElement("button");b.textContent=t;if(c)b.className=c;b.onclick=()=>{cur=f();show();scrollTo(0,0)};nv.appendChild(b)};
+ if(cur>1)mk("Sebelumnya",()=>cur-1);
+ if(cur<100)mk("Berikutnya",()=>cur+1);
+ mk("Ke video belum selesai",first,"main");
+ m.appendChild(nv);
+}
+show();
+</script>
+</body>
+</html>
